@@ -1,0 +1,46 @@
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "username": "pedro",
+  "password": "12345"
+}
+###
+
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "username": "pedro",
+  "password": "12345"
+}
+> {% client.global.set("auth_token", response.body.trim()); %}
+###
+
+GET http://localhost:8080/users
+##Authorization: Bearer {{auth_token}}
+Content-Type: */*
+###
+
+GET http://localhost:8080/users/pedro
+Authorization: Bearer {{auth_token}}
+Content-Type: */*
+
+###
+
+GET http://localhost:8080/users/juan
+Authorization: Bearer {{auth_token}}
+Content-Type: */*
+
+###
+
+PUT http://localhost:8080/users/pedro
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "username": "pedro",
+  "password": "123456"
+}
+###
+###

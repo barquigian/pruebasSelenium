@@ -1,0 +1,24 @@
+services:
+  postgresql:
+    image: "postgres:14.1"
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=quarkus_test
+      - POSTGRES_PASSWORD=quarkus_test
+      - POSTGRES_DB=quarkus_test
+
+  secured_service:
+    build:
+      dockerfile: src/main/docker/Dockerfile.jvm
+      context: seguridad
+    container_name: seguridad_container
+    depends_on:
+      - postgresql
+    ports:
+      - "8080:8080"
+    environment:
+      - nats.server=nats://localhost:4242
+      - nats.username=nats://localhost:4242
+      - nats.password=nats://localhost:4242
+      - quarkus.datasource.jdbc.url=jdbc:postgresql://postgresql:5432/quarkus_test
