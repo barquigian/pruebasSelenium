@@ -19,11 +19,11 @@ public class Login {
 
     public void writeUsername(String username) throws InterruptedException {
         driver.findElement(By.name("email")).sendKeys(username);
-        Thread.sleep(5000);
+        Thread.sleep(1000);
     }
     public void writeUserpassword(String password) throws InterruptedException {
         driver.findElement(By.name("password")).sendKeys(password);
-        Thread.sleep(5000);
+        Thread.sleep(1000);
     }
     public void navigate(){
         driver.get(BASE_URL+ "/login");

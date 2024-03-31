@@ -89,6 +89,32 @@
       <artifactId>selenium-java</artifactId>
       <version>4.18.1</version>
     </dependency>
+    <dependency>
+      <groupId>com.github.erosb</groupId>
+      <artifactId>everit-json-schema</artifactId>
+      <version>1.14.4</version>
+    </dependency>
+    <dependency>
+      <groupId>com.github.javafaker</groupId>
+      <artifactId>javafaker</artifactId>
+      <version>1.0.2</version>
+    </dependency>
+    <dependency>
+      <groupId>com.aventstack</groupId>
+      <artifactId>extentreports</artifactId>
+      <version>5.1.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+      <version>2.5.4</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <version>3.2.4</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
@@ -150,7 +176,7 @@
             <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
             <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
             <!--suppress UnresolvedMavenProperty -->
-            <maven.home>${maven.home}</maven.home>
+            <maven.home>${MAVEN.HOME}</maven.home>
           </systemPropertyVariables>
         </configuration>
       </plugin>

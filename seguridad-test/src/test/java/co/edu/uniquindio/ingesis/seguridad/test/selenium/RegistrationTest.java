@@ -3,30 +3,31 @@ package co.edu.uniquindio.ingesis.seguridad.test.selenium;
 import co.edu.uniquindio.ingesis.seguridad.test.pageObjects.Login;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.junit.jupiter.api.Test;
+import org.json.JSONObject;
+import com.github.javafaker.Faker;
+import org.everit.json.schema.Schema;
+import org.everit.json.schema.loader.SchemaLoader;
+import org.springframework.boot.test.context.SpringBootTest;
 
+@SpringBootTest
 public class RegistrationTest {
     @Autowired
     static WebDriver driver;
     @Autowired
-    Login login;
+    static Login login;
     private static final String CHROME_DRIVER_PATH = "C:\\Users\\TecnoSystem\\Documents\\U 2024\\chromedriver\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe";
 
     public static WebDriver getDriver() {
         if (driver == null) {
             // Configurar la ubicación del chromedriver
             System.setProperty("webdriver.chrome.driver", CHROME_DRIVER_PATH);
-
-            // Configurar opciones adicionales si es necesario
             ChromeOptions options = new ChromeOptions();
-            // options.addArguments("--headless");  // Ejecutar Chrome en modo headless
-            // options.addArguments("--disable-gpu"); // Deshabilitar GPU para evitar problemas de visualización en ciertos sistemas
-
             // Inicializar el WebDriver
             driver = new ChromeDriver(options);
         }
@@ -36,7 +37,10 @@ public class RegistrationTest {
     public void setUp() {
         // Configuración del WebDriver
         System.setProperty("webdriver.chrome.driver", CHROME_DRIVER_PATH);
-        driver = getDriver();
+        ChromeOptions options = new ChromeOptions();
+        driver = new ChromeDriver(options);
+
+        //driver = getDriver();
         driver.manage().window().maximize();
         // Inicializar la instancia de Login
         login = new Login(driver);
@@ -53,6 +57,8 @@ public class RegistrationTest {
         // Verificar el mensaje de registro exitoso
         String successMessage = driver.findElement(By.id("success-message")).getText();
         assert(successMessage.contains("¡Registro exitoso!"));
+        // Validar la estructura de la respuesta con JSON Schema
+        //validateResponseWithSchema(getApiResponse());
     }
 
     @Test
